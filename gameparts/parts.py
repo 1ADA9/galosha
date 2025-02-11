@@ -1,6 +1,11 @@
 class Board:
+
+    field_size = 3
+
     def __init__(self):
-        self.board = [[' ' for _ in range(3)] for _ in range(3)]
+        self.board = [
+            [' ' for _ in range(self.field_size)] for _ in range(self.field_size)
+        ]
 
     def make_move(self, row, col, player):
         self.board[row][col] = player
@@ -9,6 +14,13 @@ class Board:
         for row in self.board:
             print('|'.join(row))
             print('-' * 5)
+
+    # Переопределяем метод __str__.
+    def __str__(self):
+        return (
+            'Объект игрового поля размером '
+            f'{self.field_size}x{self.field_size}'
+        )
 
     def is_board_full(self):
         # Цикл проходится по всем столбцам игрового поля.
@@ -21,6 +33,7 @@ class Board:
                     return False
         # Иначе - ничья!
         return True
+    
     def check_win(self, player):
         # Тут реализована проверка по вертикали и горизонтали.
         for i in range(3):
